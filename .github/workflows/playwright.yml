@@ -7,8 +7,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    # runs-on: ubuntu-latest
-    container: mcr.microsoft.com/playwright:v1.22.0-focal
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
