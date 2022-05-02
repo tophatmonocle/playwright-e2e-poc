@@ -3,6 +3,7 @@ pipeline {
    stages {
       stage('e2e-tests') {
          steps {
+            sh 'echo "Running e2e tests"'
             sh 'npm install'
             sh 'npm run test'
          }
