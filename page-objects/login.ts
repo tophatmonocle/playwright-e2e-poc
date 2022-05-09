@@ -1,33 +1,38 @@
 // playwright-dev-page.ts
-import { expect, Locator, Page } from '@playwright/test';
-import  constants  from '../constants/constants';
+import { expect, Locator, Page } from "@playwright/test";
+import constants from "../constants/constants";
 
-export class PlaywrightDevPage {
+export class LoginPage {
   readonly page: Page;
-  readonly getStartedLink: Locator;
-  readonly gettingStartedHeader: Locator;
-  readonly pomLink: Locator;
-  readonly tocList: Locator;
+  readonly schoolField: Locator;
+  readonly school: Locator;
+  readonly email: Locator;
+  readonly password: Locator;
+  readonly loginButton: Locator;
+  readonly header: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.getStartedLink = page.locator('a', { hasText: 'Get started' });
-    this.gettingStartedHeader = page.locator('h1', { hasText: 'Getting started' });
-    this.pomLink = page.locator('li', { hasText: 'Playwright Test' }).locator('a', { hasText: 'Page Object Model' });
-    this.tocList = page.locator('article ul > li > a');
+    this.schoolField = page.locator("id=select-input-1");
+    this.school = page.locator('ul[data-click-id="login-school-menu"] > li', {
+      hasText: "Top Hat University - Internal Rollouts",
+    });
+    this.email = page.locator("id=username");
+    this.password = page.locator("id=password");
+    this.loginButton = page.locator('[aria-label="Login"]');
+    this.header = page.locator('[aria-label="Courses, Account and Help"]');
   }
 
   async goto() {
     await this.page.goto(constants.CA.URL);
   }
 
-  async getStarted() {
-    await this.getStartedLink.first().click();
-    await expect(this.gettingStartedHeader).toBeVisible();
-  }
-
-  async pageObjectModel() {
-    await this.getStarted();
-    await this.pomLink.click();
+  async profLogin() {
+    await this.schoolField.fill("Top Hat University - Internal Rollouts");
+    await this.school.click();
+    await this.email.fill("eugene.medentsii+prof@tophatmonocle.com");
+    await this.password.fill("tophat1234");
+    await this.loginButton.click();
+    await expect(this.header).toBeVisible();
   }
 }

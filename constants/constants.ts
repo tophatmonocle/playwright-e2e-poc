@@ -1,7 +1,7 @@
 const constants = {
-    CA: {
-        URL: 'https://playwright.dev/',
-    }
+  CA: {
+    URL: "https://app.tophat.com/",
+  },
 };
 
 export default constants;
