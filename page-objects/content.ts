@@ -44,7 +44,6 @@ export class Content{
 
     async unassignIfNeeded(){
         await this.assignModuleItemID.click();
-        //await expect(this.presentModuleItemButton).toBeVisible();
 
         if(await this.page.$('button[data-click-id="unassign module item"')) {
             await this.unassignModuleItem.click();
